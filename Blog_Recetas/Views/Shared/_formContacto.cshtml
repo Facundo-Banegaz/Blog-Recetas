@@ -1,0 +1,25 @@
+﻿@model Blog_Recetas.Models.Contacto
+
+
+<div class="mb-3">
+    <label for="Name" class="form-label">Nombre y Apellido</label>
+    <input type="text" class="form-control" id="Name" name="Name" asp-for="Name" />
+    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+</div>
+
+<div class="mb-3">
+    <label for="Email" class="form-label">Correo Electronico</label>
+    <input type="text" class="form-control" id="Email" name="Email" asp-for="Email" />
+    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+</div>
+
+<div class="mb-3">
+    <label for="Phone" class="form-label">Teléfono de Contacto -- (Opcional)</label>
+    <input type="text" class="form-control" id="Phone" name="Phone" asp-for="Phone" />
+</div>
+    
+<div class="mb-3">
+        <label for="Message" class="form-label">Mensaje</label>
+        <textarea aria-describedby="Mensaje" class="form-control" id="Message" asp-for="Message"></textarea>
+        @Html.ValidationMessageFor(x => x.Message, "", new { @class = "text-danger" })
+</div>

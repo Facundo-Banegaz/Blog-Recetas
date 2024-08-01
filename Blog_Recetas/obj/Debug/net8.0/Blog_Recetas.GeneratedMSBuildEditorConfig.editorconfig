@@ -22,8 +22,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Home/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Home/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Home/Post.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQb3N0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Home/Privacy.cshtml]
@@ -32,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Shared/_formContacto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9mb3JtQ29udGFjdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/baneg/source/repos/Blog_Recetas/Blog_Recetas/Views/Shared/_LoginPartial.cshtml]

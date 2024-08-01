@@ -2,7 +2,7 @@
 
 namespace Blog_Recetas.Services
 {
-    public interface IAutorService
+    public interface IAutorRepository
     {
         Task<IEnumerable<Autor>> GetAll();
         Task<Autor> GetId(int id);

@@ -1,0 +1,24 @@
+﻿@model Blog_Recetas.Models.Contacto
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["TituloHeader"] = " Sección De Contacto";
+    ViewData["SubtituloHeader"] = "¿Tienes alguna duda? ¿Quieres hacerme una sugerencia?";
+
+    ViewData["ImagenHeader"] = "/assets/img/contact-bg.jpg";
+}
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-12 col-xl-12">
+            <p>Complete el Formulario y nos ponemos en contacto a la breveda.</p>
+
+            <div class="my-5">
+                <form asp-action="Contact">
+                    <partial name="_formContacto" model="@Model" />
+                    <button type="submit" class="form-control mt-3 btn btn-primary" value="Contacto">Enviar Consulta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

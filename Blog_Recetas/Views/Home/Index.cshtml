@@ -1,0 +1,29 @@
+﻿@* ﻿@model IEnumerable<Blog_Recetas.Models.Publicacion>
+ *@
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["TituloHeader"] = "Bienvenido a Nuestro!!";
+    ViewData["SubtituloHeader"] = "Blog De Recetas";
+    ViewData["ImagenHeader"] = "/assets/img/Home-bg.jpeg";
+}
+@* <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            @foreach (var item in Model)
+            {
+                <div class="post-preview border-bottom">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <h2 class="post-title">@item.Titulo</h2>
+                        <h3 class="post-subtitle">@item.Subtitulo</h3>
+                    </a>
+                    <p class="post-meta">
+                        Fecha de Publicación:
+                        @item.FechaPublicacion.ToString("d MMMM yyyy")
+                    </p>
+                </div>
+            }
+
+        </div>
+    </div>
+</div> *@
+<h1>Estamos en el acceso comun</h1>

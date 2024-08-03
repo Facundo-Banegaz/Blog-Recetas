@@ -1,4 +1,5 @@
 using Blog_Recetas.Data;
+using Blog_Recetas.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 var strConection = builder.Configuration.GetConnectionString("CadenaSql").ToString();
 
 builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(strConection));
+
+//implementacion de repository
+builder.Services.AddTransient<IRepositoryAutor, AutorServices>();
+
 
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

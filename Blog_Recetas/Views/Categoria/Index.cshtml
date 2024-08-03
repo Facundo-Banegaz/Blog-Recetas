@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Blog_Recetas.Models.Categoria>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["TituloHeader"] = " Sección De Categoria";
+    ViewData["SubtituloHeader"] = "Toda Nuestras Categorias.";
+
+    ViewData["ImagenHeader"] = "/assets/img/categoria-bg.jpg";
+}
+
+ <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <h1>Listados De Categorias</h1>
+
+            <p>
+                <a asp-action="Create" class="btn btn-primary">Crear Categoria</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Ediar</a> 
+                                <a asp-action="Details" class="btn btn-info"  asp-route-id="@item.Id">Detalles</a> 
+                                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

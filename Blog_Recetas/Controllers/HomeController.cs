@@ -1,4 +1,5 @@
 using Blog_Recetas.Models;
+using Blog_Recetas.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,12 +10,16 @@ namespace Blog_Recetas.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
+        private readonly IRepositoryAutor _autorServices;
+
         //private readonly 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IRepositoryAutor autorServices)
         {
             _logger = logger;
             _configuration = configuration;
+            _autorServices = autorServices;
         }
+
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -28,6 +33,12 @@ namespace Blog_Recetas.Controllers
             return View();
         }
 
+        //[Authorize(Roles = "Administrator")]
+        [AllowAnonymous]
+        public IActionResult PostRecomendado()
+        {
+            return View();
+        }
         [AllowAnonymous]
         public IActionResult About()
         {
@@ -64,11 +75,6 @@ namespace Blog_Recetas.Controllers
             return RedirectToAction("Contact");
         }
 
-        //[Authorize(Roles = "Administrator")]
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

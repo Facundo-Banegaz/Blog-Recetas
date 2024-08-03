@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog_Recetas.Services
 {
-    public class AutorServices : IAutorRepository
+    public class AutorServices : IRepositoryAutor
     {
         private readonly BlogContext _blogContext;
 
@@ -14,36 +14,53 @@ namespace Blog_Recetas.Services
 
             _blogContext = blogContext;
         }
-        public async Task AddAutor( Autor autor)
-        {
 
+        public async Task AddAutor(Autor autor)
+        {
             _blogContext.Add(autor);
             await _blogContext.SaveChangesAsync();
         }
 
         public async Task DeleteAutor(int id)
         {
+            var autor = await _blogContext.Autores.FindAsync(id);
+
+            if (autor == null)
+            {
+                throw new KeyNotFoundException($"No se encontró el autor con el ID {id}.");
+            }
+
+            _blogContext.Autores.Remove(autor);
             await _blogContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Autor>> GetAll()
         {
-           var autores  =await _blogContext.Autores.ToListAsync();
-
-            return autores;
+            return await _blogContext.Autores.ToListAsync();
         }
 
         public async Task<Autor> GetId(int id)
         {
-                var autor = await _blogContext.Autores
-                   .FirstOrDefaultAsync(m => m.Id == id);   
+            var autor = await _blogContext.Autores.FirstOrDefaultAsync(a => a.Id.Equals(id));
+
+            if (autor == null)
+            {
+                throw new KeyNotFoundException($"No se encontró el autor con el ID {id}.");
+            }
 
             return autor;
         }
 
         public async Task UpdateAutor(Autor autor)
         {
-            _blogContext.Update(autor);
+            var existingAutor = await _blogContext.Autores.FindAsync(autor.Id);
+
+            if (existingAutor == null)
+            {
+                throw new KeyNotFoundException($"No se encontró el autor con el ID {autor.Id}.");
+            }
+
+            _blogContext.Entry(existingAutor).CurrentValues.SetValues(autor);
             await _blogContext.SaveChangesAsync();
         }
     }

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Blog_Recetas.Models.Instruccion>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["TituloHeader"] = "Todos Nuestras Instrucciones";
+    ViewData["SubtituloHeader"] = "Para Preparar las mejores Recetas.";
+    ViewData["ImagenHeader"] = "/assets/img/instruccion-bg.jpeg";
+}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-12 col-xl-12">
+
+            <h1>Instrucciones</h1>
+
+            <p>
+                <a asp-action="Create">Crear Nueva</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NumeroPasos)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Descripcion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tiempo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Notas)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Publicacion)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumeroPasos)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tiempo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Notas)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Publicacion.Descripcion)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Blog_Recetas.Models.Publicacion>
+
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["TituloHeader"] = "Todas Nuestras Recetas";
+    ViewData["SubtituloHeader"] = "Desde platos principales hasta postres deliciosos, explora nuestra colección.";
+    ViewData["ImagenHeader"] = "/assets/img/publicacion-bg.jpeg";
+}
+
+<div class="container px-4 px-lg-5 mt-5">
+    <h1>Lista de Publicaciones</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Crear Nuevo</a>
+    </p>
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="@item.ImagenUrlPortada" class="card-img-top" alt="@item.Titulo">
+                    <div class="card-body">
+                        <h2 class="card-title">@item.Titulo</h2>
+                        <h3 class="card-subtitle mb-2 text-muted">@item.Subtitulo</h3>
+                        <p class="card-text"><strong>Fecha de Publicación:</strong> @item.FechaPublicacion.ToString("d MMMM yyyy")</p>
+                        <p class="card-text"><strong>Autor:</strong>@item.Autor.Nombre @item.Autor.SegundoNombre @item.Autor.Apellido</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

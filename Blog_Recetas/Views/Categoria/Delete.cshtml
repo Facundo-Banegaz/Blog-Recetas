@@ -1,0 +1,41 @@
+﻿@model Blog_Recetas.Models.Categoria
+
+
+@{
+    ViewData["Title"] = "Delete";
+
+    ViewData["TituloHeader"] = " Sección De Categoria";
+    ViewData["SubtituloHeader"] = "Toda Nuestras Categorias.";
+
+    ViewData["ImagenHeader"] = "/assets/img/categoria-bg.jpg";
+}
+
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <h1>Eliminar</h1>
+            <h4>Categoria</h4>
+            <h3>¿Estás segura de que quieres eliminar esto?</h3>
+            <div>
+
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Index" class="btn  btn-secondary ">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

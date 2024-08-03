@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Blog_Recetas.Models.Autor>
+
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["TituloHeader"] = "Todos Nuestros Autores";
+    ViewData["SubtituloHeader"] = "Que Realizan las mejores recetas todos los dias.";
+    ViewData["ImagenHeader"] = "/assets/img/autor-bg.jpeg";
+}
+
+
+<div class="container px-4 px-lg-5 mt-5">
+    <h1>Lista de Autores</h1>
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Crear Nuevo</a>
+    </p>
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="@item.FotoUrl" class="card-img-top img-fluid" alt="@item.Nombre">
+                    <div class="card-body">
+                        <h5 class="card-text"><strong>Autor:</strong>@item.Nombre @item.SegundoNombre @item.Apellido</h5>
+                        <p class="card-text">@item.Descripcion</p>
+                        <a target="_blank" href="@item.Biografia">Biografia</a>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">Editar</a> 
+                        <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">Detalles</a> 
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Eliminar</a>
+                    </div>
+                </div>
+             </div>
+            
+        }
+    </div>
+</div>

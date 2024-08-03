@@ -27,6 +27,11 @@ namespace Blog_Recetas.Models
         [Required(ErrorMessage = "Por favor ingresar la Biografia:")]
         public string Biografia { get; set; } = string.Empty;
 
+
+        [Display(Name = "Descripcíon:")]
+        [Required(ErrorMessage = "Por favor ingresar la Descripcíon:")]
+        public string Descripcion { get; set; } = string.Empty;
+
         [Required(ErrorMessage = "Por favor selecciona una imagen.")]
         [Display(Name = "Imagen")]
         public string FotoUrl { get; set; } = string.Empty;

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog_Recetas", "Blog_Recetas\Blog_Recetas.csproj", "{032100DC-8BE2-46B0-B960-DCF59D9B3443}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog_Recetas", "Blog_Recetas\Blog_Recetas.csproj", "{032100DC-8BE2-46B0-B960-DCF59D9B3443}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

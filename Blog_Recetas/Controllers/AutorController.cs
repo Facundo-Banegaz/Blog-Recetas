@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Blog_Recetas.Data;
-using Blog_Recetas.Models;
+﻿using Blog_Recetas.Models;
 using Blog_Recetas.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog_Recetas.Controllers
 {
@@ -20,7 +14,7 @@ namespace Blog_Recetas.Controllers
 
         public AutorController(IRepositoryAutor autorServices)
         {
-            
+
 
             this._autorServices = autorServices;
         }
@@ -29,9 +23,9 @@ namespace Blog_Recetas.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var autor = await _autorServices.GetAll();
+            var autores = await  _autorServices.GetAll();
 
-            return View(autor);
+            return View(autores);
         }
 
 
@@ -64,12 +58,14 @@ namespace Blog_Recetas.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre, SegundoNombre, Apellido, Descripcion, FotoUrl, Biografia")] Autor autor)
         {
             if (ModelState.IsValid)
             {
-                
+                var FILE = Request.Form.Files["FotoUrl"];
+
+
                 await _autorServices.AddAutor(autor);
                 return RedirectToAction(nameof(Index));
             }
@@ -111,7 +107,7 @@ namespace Blog_Recetas.Controllers
             {
                 try
                 {
-                   
+
                     await _autorServices.UpdateAutor(autor);
                 }
                 catch (DbUpdateConcurrencyException)

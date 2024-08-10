@@ -24,7 +24,7 @@ namespace Blog_Recetas.Models
 
         [Display(Name = "Descripción:")]
         [Required(ErrorMessage = "Por favor ingresar la Descripción:")]
-        public string Descripcion {  get; set; } = string.Empty;
+        public string Descripcion { get; set; } = string.Empty;
 
         [Display(Name = "Pie De Pagina:")]
         [Required(ErrorMessage = "Por favor ingresar el Pie de Pagina:")]

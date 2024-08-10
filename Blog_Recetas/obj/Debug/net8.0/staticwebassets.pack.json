@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\contact-bg.jpg"
     },
     {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\error404.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\error404.jpg"
+    },
+    {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\ingrediente-bg.jpeg",
       "PackagePath": "staticwebassets\\assets\\img\\ingrediente-bg.jpeg"
     },

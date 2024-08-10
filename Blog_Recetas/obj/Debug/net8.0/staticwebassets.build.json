@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kVdqJL7cdZD8amCbew5SdC9D4CAE8ICyxOZ7gITw+mc=",
+  "Hash": "1hGGnc6mzLp4cMCrCnCxmLN7WJmwbn+vsr4IQo8EV6M=",
   "Source": "Blog_Recetas",
   "BasePath": "_content/Blog_Recetas",
   "Mode": "Default",
@@ -1307,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\contact-bg.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\error404.jpg",
+      "SourceId": "Blog_Recetas",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\",
+      "BasePath": "_content/Blog_Recetas",
+      "RelativePath": "assets/img/error404.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\error404.jpg"
     },
     {
       "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\Home-bg.jpeg",

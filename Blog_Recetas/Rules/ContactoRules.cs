@@ -1,6 +1,6 @@
-﻿using MimeKit.Text;
+﻿using MailKit.Net.Smtp;
 using MimeKit;
-using MailKit.Net.Smtp;
+using MimeKit.Text;
 
 
 namespace Blog_Recetas.Models

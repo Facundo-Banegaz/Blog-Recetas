@@ -12,8 +12,8 @@ namespace Blog_Recetas.Models
         public string Email { get; set; } = string.Empty;
         [Phone]
         public string? Phone { get; set; } = string.Empty;
-        
-        
+
+
         [Required]
         public string Message { get; set; } = string.Empty;
 

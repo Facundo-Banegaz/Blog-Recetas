@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Blog_Recetas.Data;
+using Blog_Recetas.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Blog_Recetas.Data;
-using Blog_Recetas.Models;
 
 namespace Blog_Recetas.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class PublicacionController : Controller
     {
         private readonly BlogContext _context;
@@ -37,6 +35,8 @@ namespace Blog_Recetas.Controllers
             var publicacion = await _context.Publicaciones
                 .Include(p => p.Autor)
                 .Include(p => p.Categoria)
+                .Include(p => p.Ingredientes)
+                .Include(p => p.Instrucciones)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (publicacion == null)
             {

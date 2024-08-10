@@ -1,7 +1,10 @@
+using Blog_Recetas.Data;
 using Blog_Recetas.Models;
-using Blog_Recetas.Services;
+using Blog_Recetas.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Blog_Recetas.Controllers
@@ -10,34 +13,59 @@ namespace Blog_Recetas.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        private readonly IRepositoryAutor _autorServices;
-
+        private readonly IRepositoryPublicacion _repositoryPublicacion;
+        private readonly BlogContext _context;
         //private readonly 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IRepositoryAutor autorServices)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IRepositoryPublicacion repositoryPublicacion, BlogContext context)
         {
             _logger = logger;
             _configuration = configuration;
-            _autorServices = autorServices;
+            _repositoryPublicacion = repositoryPublicacion;
+            _context = context;
         }
 
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
 
-        [AllowAnonymous]
-        public IActionResult Post()
-        {
-            return View();
+            var publicacions = await _repositoryPublicacion.GetAll();
+            return View(publicacions);
         }
-
-        //[Authorize(Roles = "Administrator")]
         [AllowAnonymous]
-        public IActionResult PostRecomendado()
+        public async Task<IActionResult> Receta(string Filtro, int CategoriaId)
         {
-            return View();
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre");
+            var blogContext = await _repositoryPublicacion.PublicacionFiltro(Filtro, CategoriaId);
+
+            return View(blogContext);
+        }
+        [AllowAnonymous]
+
+
+        // GET: Publicacion/Details/5
+        public async Task<IActionResult> Post(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var publicacion = await _repositoryPublicacion.GetId((int)id);
+            if (publicacion == null)
+            {
+                return NotFound();
+            }
+            //publicacion.Ingredientes ??= new List<Ingrediente>();
+            //publicacion.Instrucciones ??= new List<Instruccion>();
+            return View(publicacion);
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> PostRecomendado()
+        {
+
+            var publicaion = await _repositoryPublicacion.ObtenerPublicacionMasReciente();
+            return View(publicaion);
         }
         [AllowAnonymous]
         public IActionResult About()
@@ -77,8 +105,12 @@ namespace Blog_Recetas.Controllers
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int statusCode)
         {
+            if (statusCode == 404)
+            {
+                return View("Error404");
+            }
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

@@ -1,15 +1,14 @@
-﻿@* ﻿@model Blog_Recetas.Models.Publicacion
-
- *@
+﻿@model Blog_Recetas.Models.Publicacion
 @{
 
-    ViewData["Title"] = "Home Privacy";
-    ViewData["TituloHeader"] = "Bienvenido a Nuestro!!";
-    ViewData["SubtituloHeader"] = "Blog De Recetas";
-    ViewData["ImagenHeader"] = "/assets/img/about-bg.jpg";
+    ViewData["Title"] = Model.Titulo;
+    ViewData["TituloHeader"] = Model.Titulo;
+    ViewData["SubtituloHeader"] = Model.Subtitulo;
+    ViewData["ImagenHeader"] = Model.ImagenUrlPortada;
+
 }
 
-@* <div class="container px-4 px-lg-5 mt-5">
+<div class="container px-4 px-lg-5 mt-5">
     <h1>@Model.Titulo</h1>
     <h2>@Model.Subtitulo</h2>
 
@@ -94,6 +93,5 @@
     <div class="mt-4">
         <a class="btn btn-secondary" asp-action="Index">Volver</a>
     </div>
-</div> *@
+</div>
 
-<h1>Estamos en el acceso administrador</h1>

@@ -59,7 +59,7 @@ namespace Blog_Recetas.Controllers
 
             return View(publicacion);
         }
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> PostRecomendado()
         {
 

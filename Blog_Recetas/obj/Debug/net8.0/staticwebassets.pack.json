@@ -53,6 +53,26 @@
       "PackagePath": "staticwebassets\\assets\\img\\publicacion-bg.jpeg"
     },
     {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\foto_fixed_background.png",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\foto_fixed_background.png"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\monica.jpeg",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\monica.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\portada.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\portada.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\portada2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\portada2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\portada3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\portada3.jpg"
+    },
+    {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\css\\styles.css",
       "PackagePath": "staticwebassets\\css\\styles.css"
     },

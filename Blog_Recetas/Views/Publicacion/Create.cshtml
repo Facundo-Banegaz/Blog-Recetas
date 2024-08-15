@@ -16,7 +16,7 @@
             <h4>Publicacion</h4>
             <hr />
 
-                    <form asp-action="Create">
+            <form asp-action="Create" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="Titulo" class="control-label"></label>
@@ -47,16 +47,21 @@
                             <input asp-for="FechaPublicacion" class="form-control" />
                             <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="ImagenUrlPortada" class="control-label"></label>
-                            <input asp-for="ImagenUrlPortada" class="form-control" />
-                            <span asp-validation-for="ImagenUrlPortada" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ImagenUrl" class="control-label"></label>
-                            <input asp-for="ImagenUrl" class="form-control" />
-                            <span asp-validation-for="ImagenUrl" class="text-danger"></span>
-                        </div>
+
+                <div class="form-group">
+                    <label asp-for="ImagenUrlPortada" class="control-label"></label>
+                    <img id="imgPreviewPortada" class="mb-3" style="display:none; width: 200px; height: auto;" />
+                    <input asp-for="ImagenUrlPortada" class="form-control" type="file" onchange="previewImage(event, 'imgPreviewPortada')" />
+                    <span asp-validation-for="ImagenUrlPortada" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImagenUrl" class="control-label"></label>
+                    <img id="imgPreview" class="mb-3" style="display:none; width: 200px; height: auto;" />
+                    <input asp-for="ImagenUrl" class="form-control" type="file" onchange="previewImage(event, 'imgPreview')" />
+                    <span asp-validation-for="ImagenUrl" class="text-danger"></span>
+                </div>
+
                         <div class="form-group">
                             <label asp-for="TiempoPreparacion" class="control-label"></label>
                             <input asp-for="TiempoPreparacion" class="form-control" />
@@ -92,5 +97,21 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function previewImage(event, previewElementId) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = document.getElementById(previewElementId);
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

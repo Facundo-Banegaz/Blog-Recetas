@@ -1,5 +1,7 @@
 ﻿using Blog_Recetas.Data;
 using Blog_Recetas.Models;
+using Blog_Recetas.Repository;
+using Blog_Recetas.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,18 +12,25 @@ namespace Blog_Recetas.Controllers
     [Authorize(Roles = "Administrator")]
     public class PublicacionController : Controller
     {
-        private readonly BlogContext _context;
-
-        public PublicacionController(BlogContext context)
+        private readonly IRepositoryPublicacion _repositoryPublicacion;
+        private readonly IRepositoryAutor _autorServices;
+        private readonly IRepositoryCategoria _categoriaServices;
+        private readonly IWebHostEnvironment _env;
+        public PublicacionController(IRepositoryPublicacion repositoryPublicacion, 
+            IRepositoryCategoria categoriaServices,
+            IRepositoryAutor autorServices, IWebHostEnvironment env)
         {
-            _context = context;
+            _repositoryPublicacion = repositoryPublicacion; 
+            _categoriaServices = categoriaServices;
+            _autorServices = autorServices;
+            _env = env;
         }
 
         // GET: Publicacion
         public async Task<IActionResult> Index()
         {
-            var blogContext = _context.Publicaciones.Include(p => p.Autor).Include(p => p.Categoria);
-            return View(await blogContext.ToListAsync());
+            var publicacion =await _repositoryPublicacion.GetAll();
+            return View(publicacion);
         }
 
         // GET: Publicacion/Details/5
@@ -32,12 +41,7 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var publicacion = await _context.Publicaciones
-                .Include(p => p.Autor)
-                .Include(p => p.Categoria)
-                .Include(p => p.Ingredientes)
-                .Include(p => p.Instrucciones)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var publicacion =  await _repositoryPublicacion.GetId((int)id);
             if (publicacion == null)
             {
                 return NotFound();
@@ -47,10 +51,10 @@ namespace Blog_Recetas.Controllers
         }
 
         // GET: Publicacion/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["AutorId"] = new SelectList(_context.Autores, "Id", "Apellido");
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre");
+            ViewData["AutorId"] = new SelectList(await _autorServices.GetAll(), "Id", "Apellido");
+            ViewData["CategoriaId"] = new SelectList(await _categoriaServices.GetAll(), "Id", "Nombre");
             return View();
         }
 
@@ -61,15 +65,72 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Titulo,Subtitulo,AutorId,Descripcion,PieDePagina,FechaPublicacion,ImagenUrlPortada,ImagenUrl,TiempoPreparacion,TiempoCoccion,Porciones,CategoriaId,Calorias")] Publicacion publicacion)
         {
-            if (ModelState.IsValid)
+            var filePortada = Request.Form.Files["ImagenUrlPortada"];
+            var fileImagen = Request.Form.Files["ImagenUrl"];
+
+            string NombreCarpeta = "assets/img/publicaciones";
+            string RutaRaiz = _env.WebRootPath;
+            string RutaCompleta = Path.Combine(RutaRaiz, NombreCarpeta);
+
+
+
+            if (!Directory.Exists(RutaCompleta))
             {
-                _context.Add(publicacion);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    Directory.CreateDirectory(RutaCompleta);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error creando la carpeta: " + ex.Message);
+                    return View(publicacion);
+                }
             }
-            ViewData["AutorId"] = new SelectList(_context.Autores, "Id", "Apellido", publicacion.AutorId);
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", publicacion.CategoriaId);
-            return View(publicacion);
+
+            if (filePortada != null && filePortada.Length > 0)
+            {
+                string NombreArchivoPortada = filePortada.FileName;
+                string RutaFullCompletaPortada = Path.Combine(RutaCompleta, NombreArchivoPortada);
+
+                publicacion.ImagenUrlPortada = Path.Combine(NombreCarpeta, NombreArchivoPortada);
+
+                try
+                {
+                    using (var stream = new FileStream(RutaFullCompletaPortada, FileMode.Create))
+                    {
+                        await filePortada.CopyToAsync(stream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error guardando el archivo de portada: " + ex.Message);
+                    return View(publicacion);
+                }
+            }
+
+            if (fileImagen != null && fileImagen.Length > 0)
+            {
+                string NombreArchivoImagen = fileImagen.FileName;
+                string RutaFullCompletaImagen = Path.Combine(RutaCompleta, NombreArchivoImagen);
+
+                publicacion.ImagenUrl = Path.Combine(NombreCarpeta, NombreArchivoImagen);
+
+                try
+                {
+                    using (var stream = new FileStream(RutaFullCompletaImagen, FileMode.Create))
+                    {
+                        await fileImagen.CopyToAsync(stream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error guardando el archivo de imagen: " + ex.Message);
+                    return View(publicacion);
+                }
+            }
+
+            await _repositoryPublicacion.AddPublicacion(publicacion);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Publicacion/Edit/5
@@ -80,13 +141,13 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var publicacion = await _context.Publicaciones.FindAsync(id);
+            var publicacion = await _repositoryPublicacion.GetId((int)id);
             if (publicacion == null)
             {
                 return NotFound();
             }
-            ViewData["AutorId"] = new SelectList(_context.Autores, "Id", "Apellido", publicacion.AutorId);
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", publicacion.CategoriaId);
+            ViewData["AutorId"] = new SelectList(await _autorServices.GetAll(), "Id", "Apellido");
+            ViewData["CategoriaId"] = new SelectList(await _categoriaServices.GetAll(), "Id", "Nombre");
             return View(publicacion);
         }
 
@@ -102,30 +163,103 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var publicacionExistente = await _repositoryPublicacion.GetId(id);
+
+            if (publicacionExistente == null)
             {
-                try
-                {
-                    _context.Update(publicacion);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PublicacionExists(publicacion.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            ViewData["AutorId"] = new SelectList(_context.Autores, "Id", "Apellido", publicacion.AutorId);
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nombre", publicacion.CategoriaId);
-            return View(publicacion);
+
+            var filePortada = Request.Form.Files["ImagenUrlPortada"];
+            var fileImagen = Request.Form.Files["ImagenUrl"];
+
+            string NombreCarpeta = "assets/img/publicaciones";
+            string RutaRaiz = _env.WebRootPath;
+            string RutaCompleta = Path.Combine(RutaRaiz, NombreCarpeta);
+
+            if (!Directory.Exists(RutaCompleta))
+            {
+                Directory.CreateDirectory(RutaCompleta);
+            }
+
+            if (filePortada != null && filePortada.Length > 0)
+            {
+                string NombreArchivoPortada = filePortada.FileName;
+                string RutaFullCompletaPortada = Path.Combine(RutaCompleta, NombreArchivoPortada);
+
+                if (!string.IsNullOrEmpty(publicacionExistente.ImagenUrlPortada))
+                {
+                    string RutaArchivoExistentePortada = Path.Combine(RutaRaiz, publicacionExistente.ImagenUrlPortada);
+                    if (System.IO.File.Exists(RutaArchivoExistentePortada))
+                    {
+                        System.IO.File.Delete(RutaArchivoExistentePortada);
+                    }
+                }
+
+                publicacion.ImagenUrlPortada = Path.Combine(NombreCarpeta, NombreArchivoPortada);
+
+                using (var stream = new FileStream(RutaFullCompletaPortada, FileMode.Create))
+                {
+                    await filePortada.CopyToAsync(stream);
+                }
+            }
+            else
+            {
+                publicacion.ImagenUrlPortada = publicacionExistente.ImagenUrlPortada;
+            }
+
+            if (fileImagen != null && fileImagen.Length > 0)
+            {
+                string NombreArchivoImagen = fileImagen.FileName;
+                string RutaFullCompletaImagen = Path.Combine(RutaCompleta, NombreArchivoImagen);
+
+                if (!string.IsNullOrEmpty(publicacionExistente.ImagenUrl))
+                {
+                    string RutaArchivoExistenteImagen = Path.Combine(RutaRaiz, publicacionExistente.ImagenUrl);
+                    if (System.IO.File.Exists(RutaArchivoExistenteImagen))
+                    {
+                        System.IO.File.Delete(RutaArchivoExistenteImagen);
+                    }
+                }
+
+                publicacion.ImagenUrl = Path.Combine(NombreCarpeta, NombreArchivoImagen);
+
+                using (var stream = new FileStream(RutaFullCompletaImagen, FileMode.Create))
+                {
+                    await fileImagen.CopyToAsync(stream);
+                }
+            }
+            else
+            {
+                publicacion.ImagenUrl = publicacionExistente.ImagenUrl;
+            }
+
+            try
+            {
+                publicacionExistente.Titulo = publicacion.Titulo;
+                publicacionExistente.Subtitulo = publicacion.Subtitulo;
+                publicacionExistente.AutorId = publicacion.AutorId;
+                publicacionExistente.Descripcion = publicacion.Descripcion;
+                publicacionExistente.PieDePagina = publicacion.PieDePagina;
+                publicacionExistente.FechaPublicacion = publicacion.FechaPublicacion;
+                publicacionExistente.ImagenUrlPortada = publicacion.ImagenUrlPortada;
+                publicacionExistente.ImagenUrl = publicacion.ImagenUrl;
+                publicacionExistente.TiempoPreparacion = publicacion.TiempoPreparacion;
+                publicacionExistente.TiempoCoccion = publicacion.TiempoCoccion;
+                publicacionExistente.Porciones = publicacion.Porciones;
+                publicacionExistente.CategoriaId = publicacion.CategoriaId;
+                publicacionExistente.Calorias = publicacion.Calorias;
+
+                await _repositoryPublicacion.UpdatePublicacion(publicacionExistente);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Publicacion/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -135,10 +269,7 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var publicacion = await _context.Publicaciones
-                .Include(p => p.Autor)
-                .Include(p => p.Categoria)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var publicacion = await _repositoryPublicacion.GetId((int)id);
             if (publicacion == null)
             {
                 return NotFound();
@@ -152,19 +283,20 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var publicacion = await _context.Publicaciones.FindAsync(id);
-            if (publicacion != null)
+            try
             {
-                _context.Publicaciones.Remove(publicacion);
+                await _repositoryPublicacion.DeletePublicacion(id);
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         private bool PublicacionExists(int id)
         {
-            return _context.Publicaciones.Any(e => e.Id == id);
+            return _repositoryPublicacion.GetId(id) != null;
         }
     }
 }

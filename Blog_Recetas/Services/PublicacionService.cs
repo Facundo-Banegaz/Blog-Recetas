@@ -30,7 +30,7 @@ namespace Blog_Recetas.Services
             if (publicacion == null)
             {
                 // Maneja el caso cuando no se encuentra el autor
-                throw new ArgumentException("El autor no fue encontrado.");
+                throw new ArgumentException("La publicacion no fue encontrada.");
             }
 
             _blogContext.Publicaciones.Remove(publicacion);

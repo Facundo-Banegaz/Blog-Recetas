@@ -14,7 +14,14 @@
 
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-6">
-            <img src="@Model.ImagenUrl" alt="@Model.Titulo" class="img-fluid rounded">
+            @if (!string.IsNullOrEmpty(Model.ImagenUrl))
+            {
+                <img src="@Url.Content("~/")@Model.ImagenUrl" alt="Imagen del País" class="img-fluid" width="200" />
+            }
+            else
+            {
+                <span>No hay imagen disponible</span>
+            }
         </div>
         <div class="col-md-6">
             <p><strong>Categoría:</strong> @Model.Categoria.Nombre</p>

@@ -1,5 +1,7 @@
 ﻿using Blog_Recetas.Data;
 using Blog_Recetas.Models;
+using Blog_Recetas.Repository;
+using Blog_Recetas.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,17 +11,19 @@ namespace Blog_Recetas.Controllers
     [Authorize(Roles = "Administrator")]
     public class CategoriaController : Controller
     {
-        private readonly BlogContext _context;
+        private readonly IRepositoryCategoria _categoriaServices;
 
-        public CategoriaController(BlogContext context)
+        public CategoriaController(IRepositoryCategoria categoriaServices)
         {
-            _context = context;
+            _categoriaServices = categoriaServices;
         }
 
         // GET: Categoria
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categorias.ToListAsync());
+            var categoria= await _categoriaServices.GetAll();
+           
+            return View(categoria);
         }
 
         // GET: Categoria/Details/5
@@ -30,8 +34,7 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var categoria = await _categoriaServices.GetId((int)id);
             if (categoria == null)
             {
                 return NotFound();
@@ -53,13 +56,9 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] Categoria categoria)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(categoria);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(categoria);
+
+            await _categoriaServices.AddCategoria(categoria);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Categoria/Edit/5
@@ -69,13 +68,16 @@ namespace Blog_Recetas.Controllers
             {
                 return NotFound();
             }
-
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
+            try
+            {
+                var categoria = await _categoriaServices.GetId((int)id);
+                return View(categoria);
+            }
+            catch (KeyNotFoundException)
             {
                 return NotFound();
             }
-            return View(categoria);
+
         }
 
         // POST: Categoria/Edit/5
@@ -94,8 +96,7 @@ namespace Blog_Recetas.Controllers
             {
                 try
                 {
-                    _context.Update(categoria);
-                    await _context.SaveChangesAsync();
+                    await _categoriaServices.UpdateCategoria(categoria);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,8 +122,7 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var categoria =await _categoriaServices.GetId((int)id);
             if (categoria == null)
             {
                 return NotFound();
@@ -136,19 +136,20 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria != null)
+            try
             {
-                _context.Categorias.Remove(categoria);
+                await _categoriaServices.DeleteCategoria(id);
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         private bool CategoriaExists(int id)
         {
-            return _context.Categorias.Any(e => e.Id == id);
+            return _categoriaServices.GetId(id) != null;
         }
     }
 }

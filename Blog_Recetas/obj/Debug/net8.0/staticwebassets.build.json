@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1hGGnc6mzLp4cMCrCnCxmLN7WJmwbn+vsr4IQo8EV6M=",
+  "Hash": "Cvuw1qhHkv9NiQJWp2HCePuF/tNkzfAW+3/U5Xv+H8E=",
   "Source": "Blog_Recetas",
   "BasePath": "_content/Blog_Recetas",
   "Mode": "Default",
@@ -1269,6 +1269,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\autor-bg.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\autores\\portada.jpg",
+      "SourceId": "Blog_Recetas",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\",
+      "BasePath": "_content/Blog_Recetas",
+      "RelativePath": "assets/img/autores/portada.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\autores\\portada.jpg"
     },
     {
       "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\categoria-bg.jpg",

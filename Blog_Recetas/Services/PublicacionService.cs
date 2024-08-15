@@ -27,6 +27,11 @@ namespace Blog_Recetas.Services
             var publicacion = await _blogContext.Publicaciones.FirstOrDefaultAsync(a => a.Id == id);
 
 
+            if (publicacion == null)
+            {
+                // Maneja el caso cuando no se encuentra el autor
+                throw new ArgumentException("El autor no fue encontrado.");
+            }
 
             _blogContext.Publicaciones.Remove(publicacion);
             await _blogContext.SaveChangesAsync();

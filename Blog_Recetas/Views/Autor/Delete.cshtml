@@ -18,40 +18,44 @@
                 <h4>Autor</h4>
                 <hr />
                 <dl class="row">
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Nombre)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Nombre)
                     </dd>
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.SegundoNombre)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.SegundoNombre)
                     </dd>
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-6">
                         @Html.DisplayNameFor(model => model.Apellido)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-6">
                         @Html.DisplayFor(model => model.Apellido)
                     </dd>
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-12">
                         @Html.DisplayNameFor(model => model.Descripcion)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-12">
                         @Html.DisplayFor(model => model.Descripcion)
                     </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.FotoUrl)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.FotoUrl)
+                    <dd class="col-sm-12">
+                        @if (!string.IsNullOrEmpty(Model.FotoUrl))
+                        {
+                            <img src="@Url.Content("~/")@Model.FotoUrl" alt="Imagen del País" class="img-fluid" width="200" />
+                        }
+                        else
+                        {
+                            <span>No hay imagen disponible</span>
+                        }
                     </dd>
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-12">
                         @Html.DisplayNameFor(model => model.Biografia)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-12">
                         @Html.DisplayFor(model => model.Biografia)
                     </dd>
                 </dl>

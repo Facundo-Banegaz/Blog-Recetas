@@ -15,8 +15,11 @@
             <h1>Crear</h1>
 
             <h4>Autor</h4>
-            <form asp-action="Create">
+            <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group d-flex justify-content-center">
+                    <img id="imgPreview" src="#" alt="Vista previa de la imagen" class="img-fluid" style="display: none; max-width: 400px; height: 250px;" />
+                </div>
                 <div class="form-group">
                     <label asp-for="Nombre" class="control-label"></label>
                     <input asp-for="Nombre" class="form-control" />
@@ -39,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="FotoUrl" class="control-label"></label>
-                    <input asp-for="FotoUrl" class="form-control" />
+                    <input asp-for="FotoUrl" class="form-control" type="file" class="form-control" onchange="previewImage(event)" />
                     <span asp-validation-for="FotoUrl" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -47,6 +50,7 @@
                     <input asp-for="Biografia" class="form-control" />
                     <span asp-validation-for="Biografia" class="text-danger"></span>
                 </div>
+
                 <div class="form-group mt-4">
                     <input type="submit" value="Create" class="btn btn-primary" />
                     <a class="btn btn-secondary" asp-action="Index">Volver</a>
@@ -57,8 +61,23 @@
 </div>
 
 
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = document.getElementById('imgPreview');
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+

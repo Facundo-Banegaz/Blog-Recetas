@@ -56,8 +56,7 @@ namespace Blog_Recetas.Controllers
             {
                 return NotFound();
             }
-            //publicacion.Ingredientes ??= new List<Ingrediente>();
-            //publicacion.Instrucciones ??= new List<Instruccion>();
+
             return View(publicacion);
         }
         [AllowAnonymous]
@@ -105,12 +104,9 @@ namespace Blog_Recetas.Controllers
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int statusCode)
+        public IActionResult Error()
         {
-            if (statusCode == 404)
-            {
-                return View("Error404");
-            }
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

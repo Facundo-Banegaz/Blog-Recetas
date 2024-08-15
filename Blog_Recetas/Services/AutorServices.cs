@@ -24,6 +24,12 @@ namespace Blog_Recetas.Services
         {
             var autor = await _blogContext.Autores.FirstOrDefaultAsync(a => a.Id == id);
 
+            if (autor == null)
+            {
+                // Maneja el caso cuando no se encuentra el autor
+                throw new ArgumentException("El autor no fue encontrado.");
+            }
+
             _blogContext.Autores.Remove(autor);
             await _blogContext.SaveChangesAsync();
 
@@ -38,6 +44,10 @@ namespace Blog_Recetas.Services
         {
             var autor = await _blogContext.Autores.FirstOrDefaultAsync(a => a.Id.Equals(id));
 
+            if (autor == null)
+            {
+                throw new ArgumentException("No se encontró un autor con el ID especificado.");
+            }
             return autor;
         }
 

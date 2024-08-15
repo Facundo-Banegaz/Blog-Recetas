@@ -17,9 +17,28 @@
             <h1>Editar</h1>
 
             <h4>Autor</h4>
-            <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label>Imagen Actual</label>
+                    @if (!string.IsNullOrEmpty(Model.FotoUrl))
+                    {
+                        <div class="d-flex justify-content-center">
+                            <img id="imgPreview" src="@Url.Content("~/")@Model.FotoUrl" alt="Imagen del País" class="img-fluid" width="400" />
+                        </div>
+                        <div class="d-flex justify-content-center mt-2">
+                            <a href="@Url.Content("~/")@Model.FotoUrl" target="_blank">Ver Imagen Actual</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-center">
+                            <img id="imgPreview" src="#" alt="Vista previa de la imagen" class="img-fluid" style="display: none; max-width: 400px; height: 250px;" />
+                            <p>No hay imagen disponible</p>
+                        </div>
+                    }
+                </div>
                 <div class="form-group">
                     <label asp-for="Nombre" class="control-label"></label>
                     <input asp-for="Nombre" class="form-control" />
@@ -42,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="FotoUrl" class="control-label"></label>
-                    <input asp-for="FotoUrl" class="form-control" />
+                    <input asp-for="FotoUrl" class="form-control" type="file" class="form-control" onchange="previewImage(event)" />
                     <span asp-validation-for="FotoUrl" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -63,5 +82,21 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = document.getElementById('imgPreview');
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            if (input.files && input.files[0]) {
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

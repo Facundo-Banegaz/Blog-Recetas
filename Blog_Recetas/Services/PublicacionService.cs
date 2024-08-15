@@ -65,22 +65,22 @@ namespace Blog_Recetas.Services
         public async Task<List<Publicacion>> PublicacionFiltro(string filtro, int categoriaId)
         {
             IQueryable<Publicacion> query = _blogContext.Publicaciones
-            .Include(p => p.Autor)
-            .Include(p => p.Categoria)
-            .Include(p => p.Ingredientes)
-            .Include(p => p.Instrucciones);
+               .AsNoTracking()
+               .Include(p => p.Autor)
+               .Include(p => p.Categoria)
+               .Include(p => p.Ingredientes)
+               .Include(p => p.Instrucciones);
 
-            if (!string.IsNullOrEmpty(filtro))
+            if (!string.IsNullOrEmpty(filtro) || categoriaId != 0)
             {
-                query = query.Where(p => p.Titulo.Contains(filtro) || p.Subtitulo.Contains(filtro));
-            }
-
-            if (categoriaId != 0)
-            {
-                query = query.Where(p => p.CategoriaId == categoriaId);
+                query = query.Where(p =>
+                    (string.IsNullOrEmpty(filtro) || p.Titulo.Contains(filtro) || p.Subtitulo.Contains(filtro)) &&
+                    (categoriaId == 0 || p.CategoriaId == categoriaId)
+                );
             }
 
             return await query.ToListAsync();
+
         }
 
         public async Task UpdatePublicacion(Publicacion publicacion)

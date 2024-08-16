@@ -2,7 +2,7 @@
 
 namespace Blog_Recetas.Repository
 {
-    public interface IInstruccionRepository
+    public interface IRepositoryInstruccion
     {
         Task<IEnumerable<Instruccion>> GetAll();
         Task<Instruccion> GetId(int id);

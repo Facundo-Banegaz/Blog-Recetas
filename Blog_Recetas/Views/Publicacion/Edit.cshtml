@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Descripcion" class="control-label"></label>
-                            <input asp-for="Descripcion" class="form-control" />
+                    <textarea aria-describedby="Descripcion" class="form-control" id="Descripcion" asp-for="Descripcion"></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -50,28 +50,6 @@
                             <input asp-for="FechaPublicacion" class="form-control" />
                             <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
                         </div>
-                @if (!string.IsNullOrEmpty(Model.ImagenUrlPortada))
-                {
-                    <div class="d-flex justify-content-center">
-                        <img id="imgPreviewPortada" src="@Url.Content("~/")@Model.ImagenUrlPortada" alt="Imagen de Portada" class="img-fluid" width="400" />
-                    </div>
-                    <div class="d-flex justify-content-center mt-2">
-                        <a href="@Url.Content("~/")@Model.ImagenUrlPortada" target="_blank">Ver Imagen de Portada Actual</a>
-                    </div>
-                }
-                else
-                {
-                    <div class="d-flex justify-content-center">
-                        <img id="imgPreviewPortada" src="#" alt="Vista previa de la imagen de portada" class="img-fluid" style="display: none; max-width: 400px; height: 250px;" />
-                        <p>No hay imagen de portada disponible</p>
-                    </div>
-                }
-                <div class="form-group">
-                    <label asp-for="ImagenUrlPortada" class="control-label"></label>
-                    <img id="imgPreviewPortada" class="mb-3" style="display:none; width: 200px; height: auto;" />
-                    <input asp-for="ImagenUrlPortada" class="form-control" type="file" onchange="previewImage(event, 'imgPreviewPortada')" />
-                    <span asp-validation-for="ImagenUrlPortada" class="text-danger"></span>
-                </div>
                 @if (!string.IsNullOrEmpty(Model.ImagenUrl))
                 {
                     <div class="d-flex justify-content-center">
@@ -85,7 +63,7 @@
                 {
                     <div class="d-flex justify-content-center">
                         <img id="imgPreview" src="#" alt="Vista previa de la imagen" class="img-fluid" style="display: none; max-width: 400px; height: 250px;" />
-                        <p>No hay imagen disponible</p>
+                        <img src="@Url.Content("~/assets/img/default-image.jpeg")" alt="Imagen predeterminada" class="img-fluid" width="280" height="200" />
                     </div>
                 }
                 <div class="form-group">

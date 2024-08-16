@@ -7,7 +7,7 @@
     ViewData["Title"] = Model.Titulo;
     ViewData["TituloHeader"] = Model.Titulo;
     ViewData["SubtituloHeader"] = Model.Subtitulo;
-    ViewData["ImagenHeader"] = Model.ImagenUrlPortada;
+    ViewData["ImagenHeader"] = "/assets/img/categoria-bg.jpg";
 }
 
 <div class="container px-4 px-lg-5 mt-5">
@@ -22,7 +22,7 @@
             }
             else
             {
-                <span>No hay imagen disponible</span>
+                <img src="@Url.Content("~/assets/img/default-image.jpeg")" alt="Imagen predeterminada" class="img-fluid" width="280" height="200" />
             }
         </div>
         <div class="col-md-6">

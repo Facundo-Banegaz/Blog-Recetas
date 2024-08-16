@@ -35,11 +35,9 @@ namespace Blog_Recetas.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Por favor ingresar Fecha De Publicacion:")]
-        public DateTime FechaPublicacion { get; set; } = DateTime.Now;
+        public DateTime FechaPublicacion { get; set; }
 
-        [Required(ErrorMessage = "Por favor selecciona una imagen para la Portada.")]
-        [Display(Name = "Imagen de Portada")]
-        public string ImagenUrlPortada { get; set; } = string.Empty;
+
 
         [Required(ErrorMessage = "Por favor selecciona una imagen para la Publicación.")]
         [Display(Name = "Imagen de Publicacíon")]

@@ -9,7 +9,7 @@
     ViewData["ImagenHeader"] = "/assets/img/instruccion-bg.jpeg";
 }
 <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
+
         <div class="col-md-12 col-lg-10 col-xl-8">
 
             <h1>Delete</h1>
@@ -18,47 +18,42 @@
             <div>
                 <h4>Instruccion</h4>
                 <hr />
-                <dl class="row">
+            <dl class="row  gx-4 gx-lg-5 justify-content-center">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.NumeroPasos)
+                        @Html.DisplayNameFor(model => model.Id)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.NumeroPasos)
+                        @Html.DisplayFor(model => model.Id)
                     </dd>
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-12">
                         @Html.DisplayNameFor(model => model.Descripcion)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-12">
                         @Html.DisplayFor(model => model.Descripcion)
                     </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Tiempo)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Tiempo)
-                    </dd>
-                    <dt class="col-sm-2">
+
+                    <dt class="col-sm-12">
                         @Html.DisplayNameFor(model => model.Notas)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-sm-12">
                         @Html.DisplayFor(model => model.Notas)
                     </dd>
-                    <dt class="col-sm-2">
+                    <dt class="col-sm-12">
                         @Html.DisplayNameFor(model => model.Publicacion)
                     </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Publicacion.Descripcion)
+                    <dd class="col-sm-12">
+                        @Html.DisplayFor(model => model.Publicacion.Titulo)
                     </dd>
                 </dl>
 
                 <form asp-action="Delete">
                     <input type="hidden" asp-for="Id" />
-                    <input type="submit" value="Delete" class="btn btn-danger" /> |
-                    <a asp-action="Index">Back to List</a>
+                    <input type="submit" value="Delete" class="btn btn-danger" /> 
+                    <a asp-action="Index" lass="btn btn-secondary">Volver</a>
                 </form>
             </div>
 
 
         </div>
-    </div>
+
 </div>

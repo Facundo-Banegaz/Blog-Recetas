@@ -34,7 +34,8 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Descripcion" class="control-label"></label>
-                            <input asp-for="Descripcion" class="form-control" />
+
+                    <textarea aria-describedby="Descripcion" class="form-control" id="Descripcion" asp-for="Descripcion"></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -48,12 +49,7 @@
                             <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
                         </div>
 
-                <div class="form-group">
-                    <label asp-for="ImagenUrlPortada" class="control-label"></label>
-                    <img id="imgPreviewPortada" class="mb-3" style="display:none; width: 200px; height: auto;" />
-                    <input asp-for="ImagenUrlPortada" class="form-control" type="file" onchange="previewImage(event, 'imgPreviewPortada')" />
-                    <span asp-validation-for="ImagenUrlPortada" class="text-danger"></span>
-                </div>
+
 
                 <div class="form-group">
                     <label asp-for="ImagenUrl" class="control-label"></label>

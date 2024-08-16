@@ -17,8 +17,24 @@
       "PackagePath": "staticwebassets\\assets\\img\\autor-bg.jpeg"
     },
     {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\autores\\foto_white_background.png",
+      "PackagePath": "staticwebassets\\assets\\img\\autores\\foto_white_background.png"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\autores\\monica.jpeg",
+      "PackagePath": "staticwebassets\\assets\\img\\autores\\monica.jpeg"
+    },
+    {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\autores\\portada.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\autores\\portada.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\autores\\portada2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\autores\\portada2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\autores\\portada3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\autores\\portada3.jpg"
     },
     {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\categoria-bg.jpg",
@@ -27,6 +43,10 @@
     {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\contact-bg.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\contact-bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\default-image.jpeg",
+      "PackagePath": "staticwebassets\\assets\\img\\default-image.jpeg"
     },
     {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\error404.jpg",
@@ -53,8 +73,20 @@
       "PackagePath": "staticwebassets\\assets\\img\\publicacion-bg.jpeg"
     },
     {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\Currículum.pdf",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\Currículum.pdf"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\banner.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\banner.jpg"
+    },
+    {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\foto_fixed_background.png",
       "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\foto_fixed_background.png"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\js.png",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\js.png"
     },
     {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\monica.jpeg",

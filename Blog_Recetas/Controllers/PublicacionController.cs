@@ -63,9 +63,9 @@ namespace Blog_Recetas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,Subtitulo,AutorId,Descripcion,PieDePagina,FechaPublicacion,ImagenUrlPortada,ImagenUrl,TiempoPreparacion,TiempoCoccion,Porciones,CategoriaId,Calorias")] Publicacion publicacion)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,Subtitulo,AutorId,Descripcion,PieDePagina,FechaPublicacion,ImagenUrl,TiempoPreparacion,TiempoCoccion,Porciones,CategoriaId,Calorias")] Publicacion publicacion)
         {
-            var filePortada = Request.Form.Files["ImagenUrlPortada"];
+
             var fileImagen = Request.Form.Files["ImagenUrl"];
 
             string NombreCarpeta = "assets/img/publicaciones";
@@ -87,26 +87,7 @@ namespace Blog_Recetas.Controllers
                 }
             }
 
-            if (filePortada != null && filePortada.Length > 0)
-            {
-                string NombreArchivoPortada = filePortada.FileName;
-                string RutaFullCompletaPortada = Path.Combine(RutaCompleta, NombreArchivoPortada);
 
-                publicacion.ImagenUrlPortada = Path.Combine(NombreCarpeta, NombreArchivoPortada);
-
-                try
-                {
-                    using (var stream = new FileStream(RutaFullCompletaPortada, FileMode.Create))
-                    {
-                        await filePortada.CopyToAsync(stream);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Error guardando el archivo de portada: " + ex.Message);
-                    return View(publicacion);
-                }
-            }
 
             if (fileImagen != null && fileImagen.Length > 0)
             {
@@ -156,7 +137,7 @@ namespace Blog_Recetas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Subtitulo,AutorId,Descripcion,PieDePagina,FechaPublicacion,ImagenUrlPortada,ImagenUrl,TiempoPreparacion,TiempoCoccion,Porciones,CategoriaId,Calorias")] Publicacion publicacion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Subtitulo,AutorId,Descripcion,PieDePagina,FechaPublicacion,ImagenUrl,TiempoPreparacion,TiempoCoccion,Porciones,CategoriaId,Calorias")] Publicacion publicacion)
         {
             if (id != publicacion.Id)
             {
@@ -182,31 +163,7 @@ namespace Blog_Recetas.Controllers
                 Directory.CreateDirectory(RutaCompleta);
             }
 
-            if (filePortada != null && filePortada.Length > 0)
-            {
-                string NombreArchivoPortada = filePortada.FileName;
-                string RutaFullCompletaPortada = Path.Combine(RutaCompleta, NombreArchivoPortada);
 
-                if (!string.IsNullOrEmpty(publicacionExistente.ImagenUrlPortada))
-                {
-                    string RutaArchivoExistentePortada = Path.Combine(RutaRaiz, publicacionExistente.ImagenUrlPortada);
-                    if (System.IO.File.Exists(RutaArchivoExistentePortada))
-                    {
-                        System.IO.File.Delete(RutaArchivoExistentePortada);
-                    }
-                }
-
-                publicacion.ImagenUrlPortada = Path.Combine(NombreCarpeta, NombreArchivoPortada);
-
-                using (var stream = new FileStream(RutaFullCompletaPortada, FileMode.Create))
-                {
-                    await filePortada.CopyToAsync(stream);
-                }
-            }
-            else
-            {
-                publicacion.ImagenUrlPortada = publicacionExistente.ImagenUrlPortada;
-            }
 
             if (fileImagen != null && fileImagen.Length > 0)
             {
@@ -242,7 +199,6 @@ namespace Blog_Recetas.Controllers
                 publicacionExistente.Descripcion = publicacion.Descripcion;
                 publicacionExistente.PieDePagina = publicacion.PieDePagina;
                 publicacionExistente.FechaPublicacion = publicacion.FechaPublicacion;
-                publicacionExistente.ImagenUrlPortada = publicacion.ImagenUrlPortada;
                 publicacionExistente.ImagenUrl = publicacion.ImagenUrl;
                 publicacionExistente.TiempoPreparacion = publicacion.TiempoPreparacion;
                 publicacionExistente.TiempoCoccion = publicacion.TiempoCoccion;

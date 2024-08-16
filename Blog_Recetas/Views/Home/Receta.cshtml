@@ -1,4 +1,6 @@
-﻿﻿
+﻿@model IEnumerable<Blog_Recetas.Models.Publicacion>
+
+﻿
 @{
     ViewData["Title"] = "Index";
     ViewData["TituloHeader"] = "Seccion De Recetas";
@@ -20,7 +22,7 @@
             </form>
         </div>
 
-        @if (Model.Count == 0)
+        @if (!Model.Any())
         {
             <div class="col-12 mb-4 text-center">
                 <div class="alert alert-warning">
@@ -28,24 +30,22 @@
                 </div>
                 <a href="@Url.Action("Receta")" class="btn btn-primary mt-3">Volver a cargar recetas</a>
             </div>
-        }
+        } 
         else
         {
             @foreach (var item in Model)
             {
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <img src="@item.ImagenUrl" alt="@item.Titulo" class="img-fluid rounded">
-                        <div class="card-body">
-                            <a asp-action="Post" asp-route-id="@item.Id">
-                                <h2 class="card-title">@item.Titulo</h2>
-                                <h3 class="card-subtitle mb-2 text-muted">@item.Subtitulo</h3>
-                            </a>
-                            <p class="card-text"><strong>Fecha de Publicación:</strong> @item.FechaPublicacion.ToString("d MMMM yyyy")</p>
-                            <p class="card-text"><strong>Autor:</strong> @item.Autor.Nombre @item.Autor.SegundoNombre @item.Autor.Apellido</p>
-                        </div>
+                    <div class="post-preview border-bottom">
+                        <a asp-action="Post" asp-route-id="@item.Id">
+                            <h2 class="post-title">@item.Titulo</h2>
+                            <h3 class="post-subtitle">@item.Subtitulo</h3>
+                        </a>
+                        <p class="post-meta">
+                        <strong>Autor: </strong> @item.Autor.Nombre @item.Autor.SegundoNombre @item.Autor.Apellido
+                        <strong> Fecha de Publicación: </strong> @item.FechaPublicacion.ToString("d MMMM yyyy")
+                        </p>
                     </div>
-                </div>
+                
             }
         }
     </div>

@@ -16,6 +16,8 @@ builder.Services.AddTransient<IRepositoryAutor, AutorServices>();
 builder.Services.AddTransient<IRepositoryCategoria, CategoriaService>();
 builder.Services.AddTransient<IRepositoryPublicacion, PublicacionService>();
 builder.Services.AddTransient<IRepositoryIngrediente,IngredienteServices>();
+builder.Services.AddTransient<IRepositoryInstruccion, InstruccionServices>();
+
 
 
 

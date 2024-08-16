@@ -15,6 +15,9 @@ builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(strCo
 builder.Services.AddTransient<IRepositoryAutor, AutorServices>();
 builder.Services.AddTransient<IRepositoryCategoria, CategoriaService>();
 builder.Services.AddTransient<IRepositoryPublicacion, PublicacionService>();
+builder.Services.AddTransient<IRepositoryIngrediente,IngredienteServices>();
+
+
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()

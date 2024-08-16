@@ -1,5 +1,7 @@
 ﻿using Blog_Recetas.Data;
 using Blog_Recetas.Models;
+using Blog_Recetas.Repository;
+using Blog_Recetas.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,19 +12,22 @@ namespace Blog_Recetas.Controllers
     [Authorize(Roles = "Administrator")]
     public class IngredienteController : Controller
     {
-        private readonly BlogContext _context;
-
-        public IngredienteController(BlogContext context)
+        private readonly IRepositoryIngrediente _repositoryIngrediente;
+        private readonly IRepositoryPublicacion _repositoryPublicacion;
+        public IngredienteController(IRepositoryIngrediente repositoryIngrediente, IRepositoryPublicacion repositoryPublicacion)
         {
-            _context = context;
+            _repositoryIngrediente = repositoryIngrediente;
+            _repositoryPublicacion = repositoryPublicacion;
         }
 
         // GET: Ingrediente
         public async Task<IActionResult> Index()
         {
-            var blogContext = _context.Ingredientes.Include(i => i.Publicacion);
-            return View(await blogContext.ToListAsync());
+            var ingrediente = await _repositoryIngrediente.GetAll();
+
+            return View(ingrediente);
         }
+
 
         // GET: Ingrediente/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -32,9 +37,7 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var ingrediente = await _context.Ingredientes
-                .Include(i => i.Publicacion)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ingrediente = await _repositoryIngrediente.GetId((int)id);
             if (ingrediente == null)
             {
                 return NotFound();
@@ -44,9 +47,9 @@ namespace Blog_Recetas.Controllers
         }
 
         // GET: Ingrediente/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["PublicacionId"] = new SelectList(_context.Publicaciones, "Id", "Descripcion");
+            ViewData["PublicacionId"] = new SelectList(await _repositoryPublicacion.GetAll(), "Id", "Titulo");
             return View();
         }
 
@@ -57,14 +60,8 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Cantidad,Unidad,Descripcion,PublicacionId")] Ingrediente ingrediente)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(ingrediente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["PublicacionId"] = new SelectList(_context.Publicaciones, "Id", "Descripcion", ingrediente.PublicacionId);
-            return View(ingrediente);
+            await _repositoryIngrediente.AddAIngrediente(ingrediente);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Ingrediente/Edit/5
@@ -75,12 +72,12 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var ingrediente = await _context.Ingredientes.FindAsync(id);
+            var ingrediente = await _repositoryIngrediente.GetId((int)id);
             if (ingrediente == null)
             {
                 return NotFound();
             }
-            ViewData["PublicacionId"] = new SelectList(_context.Publicaciones, "Id", "Descripcion", ingrediente.PublicacionId);
+            ViewData["PublicacionId"] = new SelectList(await _repositoryPublicacion.GetAll(), "Id", "Titulo");
             return View(ingrediente);
         }
 
@@ -96,12 +93,10 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+   
                 try
                 {
-                    _context.Update(ingrediente);
-                    await _context.SaveChangesAsync();
+                   await  _repositoryIngrediente.UpdateIngrediente(ingrediente);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,9 +110,9 @@ namespace Blog_Recetas.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["PublicacionId"] = new SelectList(_context.Publicaciones, "Id", "Descripcion", ingrediente.PublicacionId);
-            return View(ingrediente);
+            
+
+            
         }
 
         // GET: Ingrediente/Delete/5
@@ -128,9 +123,7 @@ namespace Blog_Recetas.Controllers
                 return NotFound();
             }
 
-            var ingrediente = await _context.Ingredientes
-                .Include(i => i.Publicacion)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ingrediente = await _repositoryIngrediente.GetId((int)id);
             if (ingrediente == null)
             {
                 return NotFound();
@@ -144,19 +137,20 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ingrediente = await _context.Ingredientes.FindAsync(id);
-            if (ingrediente != null)
+            try
             {
-                _context.Ingredientes.Remove(ingrediente);
+                await _repositoryIngrediente.DeleteIngrediente(id);
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         private bool IngredienteExists(int id)
         {
-            return _context.Ingredientes.Any(e => e.Id == id);
+            return _repositoryIngrediente.GetId(id) != null;
         }
     }
 }

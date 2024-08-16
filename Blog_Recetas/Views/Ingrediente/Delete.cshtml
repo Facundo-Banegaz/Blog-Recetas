@@ -50,8 +50,11 @@
                 </dl>
             </div>
             <div>
-                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model?.Id">Editar</a> 
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+                </form>
             </div>
         </div>
     </div>

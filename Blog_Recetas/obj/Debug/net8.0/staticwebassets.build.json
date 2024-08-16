@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JVDufImUWlUw3FF3zNfZYITXQnMXIIq3NBi0LFCWxNs=",
+  "Hash": "zMJhlQeD7Mk7eCDa4GrCrSVyAAjpQUHIsBi1Y7lDmx8=",
   "Source": "Blog_Recetas",
   "BasePath": "_content/Blog_Recetas",
   "Mode": "Default",
@@ -1632,6 +1632,25 @@
       "OriginalItemSpec": "wwwroot\\assets\\img\\publicaciones\\js.png"
     },
     {
+      "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\loader.gif",
+      "SourceId": "Blog_Recetas",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\",
+      "BasePath": "_content/Blog_Recetas",
+      "RelativePath": "assets/img/publicaciones/loader.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\publicaciones\\loader.gif"
+    },
+    {
       "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\monica.jpeg",
       "SourceId": "Blog_Recetas",
       "SourceType": "Discovered",
@@ -1649,6 +1668,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\publicaciones\\monica.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\pexels-markusspiske-330771.jpg",
+      "SourceId": "Blog_Recetas",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\",
+      "BasePath": "_content/Blog_Recetas",
+      "RelativePath": "assets/img/publicaciones/pexels-markusspiske-330771.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\publicaciones\\pexels-markusspiske-330771.jpg"
     },
     {
       "Identity": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\portada.jpg",

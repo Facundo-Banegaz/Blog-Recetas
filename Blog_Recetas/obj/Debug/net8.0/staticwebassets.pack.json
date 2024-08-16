@@ -89,8 +89,16 @@
       "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\js.png"
     },
     {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\loader.gif",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\loader.gif"
+    },
+    {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\monica.jpeg",
       "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\monica.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\pexels-markusspiske-330771.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\publicaciones\\pexels-markusspiske-330771.jpg"
     },
     {
       "Id": "C:\\Users\\baneg\\source\\repos\\Blog_Recetas\\Blog_Recetas\\wwwroot\\assets\\img\\publicaciones\\portada.jpg",

@@ -615,14 +615,17 @@ progress {
 }
 
     .blockquote-footer::before {
-        content: "— ";
+        content: "ï¿½ï¿½";
     }
 
 .img-fluid {
     max-width: 100%;
     height: auto;
 }
-
+.custom-img {
+    max-width: 100%;
+    height: auto; /* Mantiene la proporciÃ³n original de la imagen */
+}
 .img-thumbnail {
     padding: 0.25rem;
     background-color: #fff;

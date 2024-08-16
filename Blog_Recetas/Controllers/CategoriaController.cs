@@ -56,7 +56,6 @@ namespace Blog_Recetas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] Categoria categoria)
         {
-
             await _categoriaServices.AddCategoria(categoria);
             return RedirectToAction(nameof(Index));
         }

@@ -61,7 +61,7 @@ namespace Blog_Recetas.Services
             .Include(p => p.Categoria)
             .Include(p => p.Ingredientes)
             .Include(p => p.Instrucciones)
-            .OrderByDescending(p => p.FechaPublicacion)
+            .OrderByDescending(p => p.Id)
             .FirstOrDefaultAsync();
 
             return publicacion;

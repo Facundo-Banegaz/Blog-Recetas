@@ -13,17 +13,17 @@
     <h2>@Model.Subtitulo</h2>
 
     <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-6">
+        <div class="col-6 col-md-8 d-flex justify-content-center">
             @if (!string.IsNullOrEmpty(Model.ImagenUrl))
             {
-                <img src="@Url.Content("~/")@Model.ImagenUrl" alt="Imagen del País" class="img-fluid" width="280" height="200" />
+                <img src="@Url.Content("~/")@Model.ImagenUrl" alt="Imagen del País" class="img-fluid custom-img" />
             }
             else
             {
-                <img src="@Url.Content("~/assets/img/default-image.jpeg")" alt="Imagen predeterminada" class="img-fluid" width="280" height="200" />
+                <img src="@Url.Content("~/assets/img/default-image.jpeg")" alt="Imagen predeterminada" class="img-fluid custom-img" />
             }
         </div>
-        <div class="col-md-6">
+        <div class="col-6 col-md-4">
             <p><strong>Categoría:</strong> @Model.Categoria.Nombre</p>
             <p><strong>Fecha de Publicación:</strong> @Model.FechaPublicacion.ToString("d MMMM yyyy")</p>
             <p class="card-text"><strong>Autor:</strong>@Model.Autor.Nombre @Model.Autor.SegundoNombre @Model.Autor.Apellido</p>

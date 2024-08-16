@@ -6,6 +6,7 @@ namespace Blog_Recetas.Repository
     {
         Task<IEnumerable<Categoria>> GetAll();
         Task<Categoria> GetId(int id);
+
         Task AddCategoria(Categoria categoria);
         Task UpdateCategoria(Categoria categoria);
         Task DeleteCategoria(int id);

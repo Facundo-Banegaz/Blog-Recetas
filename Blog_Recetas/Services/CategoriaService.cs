@@ -58,5 +58,7 @@ namespace Blog_Recetas.Services
             _blogContext.Categorias.Update(categoria);
             await _blogContext.SaveChangesAsync();
         }
+
+
     }
 }

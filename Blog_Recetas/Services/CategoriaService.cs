@@ -36,6 +36,8 @@ namespace Blog_Recetas.Services
             await _blogContext.SaveChangesAsync();
         }
 
+
+
         public async Task<IEnumerable<Categoria>> GetAll()
         {
             return await _blogContext.Categorias.ToListAsync();
@@ -58,6 +60,7 @@ namespace Blog_Recetas.Services
             _blogContext.Categorias.Update(categoria);
             await _blogContext.SaveChangesAsync();
         }
+
 
 
     }

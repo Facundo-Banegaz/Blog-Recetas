@@ -53,7 +53,7 @@ namespace Blog_Recetas.Services
 
         public async Task UpdateAutor(Autor autor)
         {
-
+            var Exist = 
             _blogContext.Autores.Update(autor);
             await _blogContext.SaveChangesAsync();
         }

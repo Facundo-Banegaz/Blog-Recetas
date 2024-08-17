@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace Blog_Recetas.Models
 {
@@ -34,8 +35,8 @@ namespace Blog_Recetas.Models
         [Display(Name = "Fecha De Publicacion")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Required(ErrorMessage = "Por favor ingresar Fecha De Publicacion:")]
-        public DateTime FechaPublicacion { get; set; }
+
+        public DateTime FechaPublicacion { get; set; } = DateTime.Now;
 
 
 

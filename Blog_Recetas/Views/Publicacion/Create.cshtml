@@ -43,11 +43,11 @@
                             <input asp-for="PieDePagina" class="form-control" />
                             <span asp-validation-for="PieDePagina" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="FechaPublicacion" class="control-label"></label>
-                            <input asp-for="FechaPublicacion" class="form-control" />
-                            <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
-                        </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="FechaPublicacion" />
+                    <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
+                </div>
+
 
 
 

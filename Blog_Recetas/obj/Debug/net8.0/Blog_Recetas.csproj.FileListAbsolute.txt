@@ -270,3 +270,4 @@ C:\Users\baneg\source\repos\Blog_Recetas\Blog_Recetas\obj\Debug\net8.0\refint\Bl
 C:\Users\baneg\source\repos\Blog_Recetas\Blog_Recetas\obj\Debug\net8.0\Blog_Recetas.pdb
 C:\Users\baneg\source\repos\Blog_Recetas\Blog_Recetas\obj\Debug\net8.0\Blog_Recetas.genruntimeconfig.cache
 C:\Users\baneg\source\repos\Blog_Recetas\Blog_Recetas\obj\Debug\net8.0\ref\Blog_Recetas.dll
+C:\Users\baneg\source\repos\Blog_Recetas\Blog_Recetas\obj\Debug\net8.0\Blog_Recetas.sourcelink.json

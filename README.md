@@ -28,7 +28,7 @@ El proyecto me ha permitido aplicar y reforzar mis conocimientos en desarrollo w
 ## Tecnologías Utilizadas
 
 - **Frontend:** HTML5, CSS3, Bootstrap, JavaScript
-- **Backend:** C#, ASP.NET Core, Web API
+- **Backend:** C#, ASP.NET Core
 - **Base de Datos:** SQL Server, Entity Framework Core
 - **Autenticación y Autorización:** ASP.NET Core Identity
 - **Despliegue:** Somee.com
